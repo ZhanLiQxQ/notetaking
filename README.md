@@ -45,7 +45,36 @@ i = 3 等价于*i = 3，等价于j = 3
 
 2.3 指针&数组
 
+数组变量实际是指针变量
+
+<img width="164" alt="image" src="https://user-images.githubusercontent.com/116830062/215237582-8df1c7dc-9498-41ad-b841-9521a3fb74f8.png">
+
 <img width="445" alt="image" src="https://user-images.githubusercontent.com/116830062/215091816-ef8fe281-3592-43cd-a8e8-0ee7aa9747e7.png">
 
+注：
+1.数组中元素时连续存储的，数组大小固定
+
+2.数组存入元素之前必须分配完毕空间
+
+
+数组变长问题：
+
+1 . int a[100] 在堆栈上中的数组大小必须给定。
+
+2 . 想要运行时在确定数组长度，可以用new，在堆上分配空间，例如：
+
+<img width="104" alt="image" src="https://user-images.githubusercontent.com/116830062/215237357-e7d712cf-2e73-4bee-bab0-06304872acfc.png">
+
+3 . 但在c99标准中已经允许数组变长，在dev c++中int a[n]已经允许，但在vs中不允许，编译器问题。
+
+2.4 容器
+
+容器就是保存其它对象的对 象
+
+第三章 软件工程简介
+
+3.1 时间复杂度
+
+大O表示法
 
 
