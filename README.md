@@ -75,6 +75,30 @@ i = 3 等价于*i = 3，等价于j = 3
 
 3.1 时间复杂度
 
-大O表示法
+1 . 大O表示法：
 
+如果f是g的量级的/f是O（g），则
+
+存在非负常数C和K，使得n >= K , f(n) <= C g(n)
+
+<img width="410" alt="image" src="https://user-images.githubusercontent.com/116830062/215239824-2cd3c785-c1ea-4ecb-b918-3dbf84378291.png">
+<img width="382" alt="image" src="https://user-images.githubusercontent.com/116830062/215239832-6166e7ef-d405-4570-a264-eec0b8f13d6b.png">
+<img width="309" alt="image" src="https://user-images.githubusercontent.com/116830062/215239884-cf1b3218-2336-4f28-a7a2-3de34daa3faf.png">
+<img width="257" alt="image" src="https://user-images.githubusercontent.com/116830062/215239894-25c7c5d6-3766-416c-a126-9029526c21b4.png">
+分析程序时间复杂度：
+<img width="130" alt="image" src="https://user-images.githubusercontent.com/116830062/215239927-f00471e5-0ee8-4fed-a2e5-db3647f778ee.png">
+<img width="418" alt="image" src="https://user-images.githubusercontent.com/116830062/215239960-5509d8a6-a0e2-4a02-a424-5e56b838aefb.png">
+
+第四章 递归
+
+汉诺塔问题 worsttime（n）= O(2^n)
+<img width="287" alt="image" src="https://user-images.githubusercontent.com/116830062/215241411-82678926-9da9-4404-8632-609f49dbb9eb.png">
+<img width="294" alt="image" src="https://user-images.githubusercontent.com/116830062/215241392-bbbe90a1-cab0-41aa-a630-d3c5e5d177f2.png">
+
+第五章 向量和双端队列
+
+5.1 vector
+
+stl中的所有类都是模板类
+<img width="98" alt="image" src="https://user-images.githubusercontent.com/116830062/215242012-ae7ee954-7d46-4387-99ac-94ad3c145d32.png">
 
