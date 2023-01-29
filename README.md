@@ -93,6 +93,7 @@ i = 3 等价于*i = 3，等价于j = 3
 
 汉诺塔问题 worsttime（n）= O(2^n)
 <img width="287" alt="image" src="https://user-images.githubusercontent.com/116830062/215241411-82678926-9da9-4404-8632-609f49dbb9eb.png">
+
 <img width="294" alt="image" src="https://user-images.githubusercontent.com/116830062/215241392-bbbe90a1-cab0-41aa-a630-d3c5e5d177f2.png">
 
 第五章 向量和双端队列
@@ -100,5 +101,36 @@ i = 3 等价于*i = 3，等价于j = 3
 5.1 vector
 
 stl中的所有类都是模板类
+
 <img width="98" alt="image" src="https://user-images.githubusercontent.com/116830062/215242012-ae7ee954-7d46-4387-99ac-94ad3c145d32.png">
+
+<img width="322" alt="image" src="https://user-images.githubusercontent.com/116830062/215323719-04f6590c-5deb-436c-8d3c-d29e1bfd726f.png">
+
+<img width="311" alt="image" src="https://user-images.githubusercontent.com/116830062/215323578-eefaefb6-c26b-4dd9-a356-ef926114d747.png">
+
+特点：
+
+1 .连续存储
+2 .随机访问
+3 .数组比向量唯一的优势是方便初始化。
+
+<img width="441" alt="image" src="https://user-images.githubusercontent.com/116830062/215324896-6bf40f08-22bf-4111-9b35-808c43f02bdc.png">
+
+说明：
+1 .erase之后，itr将指向之前vector中的下一个元素
+
+2 . .front 返回的是值，不是迭代器
+
+
+第十一章 优先队列和堆
+
+11.1 优先队列 priority_queue
+1. 定义：一种容器，根据一定方式为项分配优先级，只有优先级最高的可以被访问和删除
+
+
+1 .插入：avgTime(n)=O(1)
+
+2 .删除：worstTime（n）=O(logn)
+
+2 .优先级队列的应用
 
