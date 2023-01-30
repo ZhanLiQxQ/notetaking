@@ -217,6 +217,13 @@ stl中的所有类都是模板类
 
 从上到下整体有序的完全二叉树，每一子树的根都是最大的。
 
+任何支持迭代器随机访问的容器都可以充当堆：数组，向量，双端队列等
+
+<img width="221" alt="image" src="https://user-images.githubusercontent.com/116830062/215457532-d4b44880-6bf9-44a4-937e-62ff8a190b8d.png">
+
+用数组表示：（原则是父母子女下标的对应关系满足公式）
+<img width="243" alt="image" src="https://user-images.githubusercontent.com/116830062/215457788-9fae94b5-5cb1-4b63-b2c8-b8950b4183c6.png">
+
 1. 下标：
     父母：i = (j-1)/2
     孩子：j = 2i+1 , 2i+2
@@ -242,7 +249,11 @@ stl中的所有类都是模板类
 
 <img width="321" alt="image" src="https://user-images.githubusercontent.com/116830062/215438836-537b4f2b-bc1b-4a5b-ae81-e4a1d253ea6d.png">
 
-<img width="325" alt="image" src="https://user-images.githubusercontent.com/116830062/215450669-b5f9aae8-4ae8-43d6-9fcf-dc0ea6b5e16a.png">
+<img width="335" alt="image" src="https://user-images.githubusercontent.com/116830062/215454448-039d1cee-5eb5-4ddc-8550-52c5314f7a83.png">
+
+下沉至叶节点后，调用push_heap插入55
+
+<img width="356" alt="image" src="https://user-images.githubusercontent.com/116830062/215454710-6067ffe2-b2e1-4cdf-99ad-ab0bd8c607a0.png">
 
 为什么不直接比较父母节点与孩子节点的值，而是一直下沉到叶，再push_heap数据上浮？
 
@@ -253,14 +264,16 @@ stl中的所有类都是模板类
   法一：
       push_heap逐个添加法
       最坏时间复杂度worstTime（n）=O（n * logn）
+      
   法二：（更快）
       先将元素放好，再调整堆
+      
       从叶节点的父母节点开始，自下而上的siftDown数据下沉。
       
-      ![image](https://user-images.githubusercontent.com/116830062/215451789-7ea7fb46-1fda-4ef7-98b9-5aafb3d79c34.png)
-
-      时间复杂度avgTime（n）=O（n）
-      
+![629160091efb4cbfa070b7d39f70d435](https://user-images.githubusercontent.com/116830062/215455181-6a23e62e-1fdb-452c-92cc-a750973571af.gif)
+    
+    时间复杂度avgTime（n）=O（n）
+     
  5. sort_heap堆排序   
     pop_heap不会将根节点erase，只是将它放到最后一个位置，所以：
     连续调用可以实现堆排序，每次将最大的放到最后，将排好的放好不动，再排序前面的
