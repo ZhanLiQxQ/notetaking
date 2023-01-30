@@ -135,7 +135,7 @@ stl中的所有类都是模板类
 
 3 . 时间复杂度：
 
-             push_back:① avgTime（n）= 不resize概率 * O（1）+ resize概率 * O（n）= n/(n+1) * O（1）+ 1/(1+n) * O(n) = O（1）
+             push_back:① 加权平均时间amortizedTime（n）= 不resize概率 * O（1）+ resize概率 * O（n）= n/(n+1) * O（1）+ 1/(1+n) * O(n) = O（1）
                        ② worstTime（n）=O（n），resize
                        
              insert：① avgTime（n）= 平均插入时间 + resize情况 = O（n/2）+ 1/(n+1) * O（n）= O(n) 概率计算
@@ -155,19 +155,34 @@ stl中的所有类都是模板类
 
   3. 每个迭代器有四个字段，first，current，last，node
 
-     ①start.current:第一个元素
+       ① start.current:第一个元素
 
-      finish.current:最后一个元素后面的元素
+         finish.current:最后一个元素后面的元素
     
-      itr.current:当前选中的元素
+         itr.current:当前选中的元素
 
-     ②first：current指向的元素所在块的第一个元素
+       ② first：current指向的元素所在块的第一个元素
     
-      ③last：current指向元素所在块的最后一个单元的下一个单元**
-    
-      ④node：指向map中current所在的单元格
+       ③ last：current指向元素所在块的最后一个单元的下一个单元**
+     
+       ④ node：指向map中current所在的单元格
      
 2.时间复杂度
+
+             pop_front,pop_back: worstTime（n）= O（1）
+             
+             push_back，push_front:
+                       ① 加权平均时间amortizedTime（n）= 不resize概率 * O（1）+ resize概率 * O（元素个数n/每一存储块的元素个数c）= n/(n+1) * O（1）+ 1/(1+n) *                              O(n/c) ,c是常数= O（1）
+                       ② worstTime（n）= O（map元素个数）=O（k*n）,k<1 = O（n），resize
+                       注：双端队列resize只影响map数组，而不需要将所有元素都重新复制，因为map是指针数组
+                       
+             insert：① avgTime（n）= 平均插入时间 + resize情况 = O（n/2）+ 1/(n+1) * O（n）= O(n) 概率计算
+                     ② worstTime（n）=O（n），resize
+
+             erase：① avgTime（n）=O（n/4）= O(n) 
+                     ② worstTime（n）=O（n/2）= O(n)
+                     **就近移动：若靠近尾部，后项前移；若靠近头部，前项后移。因此只需平均移动队列中1/4的项。       
+             
 
 第十一章 优先队列和堆
 
