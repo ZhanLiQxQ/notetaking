@@ -23,7 +23,7 @@
 
 2.2 引用参数
 
-引用参数：是一个不可修改的指针，但在函数体中自动解引用。对其一切操作解释成对变量本身操作。
+1.引用参数：是一个不可修改的指针，但在函数体中自动解引用。对其一切操作解释成对变量本身操作。
 
 <img width="99" alt="image" src="https://user-images.githubusercontent.com/116830062/215090041-dc66de11-1cab-4202-b24a-3f31937fe5be.png">
 
@@ -42,6 +42,16 @@ j的地址被拷贝到i中，i指向j
 i = 3 等价于*i = 3，等价于j = 3
 
 <img width="133" alt="image" src="https://user-images.githubusercontent.com/116830062/215091352-f22cda70-08d7-46db-8d0d-3efc487a4871.png">
+
+
+2.返回引用
+
+返回引用类型的函数优点：更快速，可以赋值给等号左边
+
+注意：
+返回的值不能是临时变量，不能是存在函数栈中的变量。
+
+所以一般返回的是堆中储存的。
 
 2.3 指针&数组
 
@@ -117,10 +127,47 @@ stl中的所有类都是模板类
 <img width="441" alt="image" src="https://user-images.githubusercontent.com/116830062/215324896-6bf40f08-22bf-4111-9b35-808c43f02bdc.png">
 
 说明：
-1 .erase之后，itr将指向之前vector中的下一个元素
+1 .erase后，所有后续元素前移，所以erase之后，itr将指向之前vector中目标删除元素的下一个元素
 
 2 . .front 返回的是值，不是迭代器
 
+3 . insert（itr，new_item）返回指向new_item的itr，6防止扩充后itr还指向就数组中的位置！
+
+3 . 时间复杂度：
+
+             push_back:① avgTime（n）= 不resize概率 * O（1）+ resize概率 * O（n）= n/(n+1) * O（1）+ 1/(1+n) * O(n) = O（1）
+                       ② worstTime（n）=O（n），resize
+                       
+             insert：① avgTime（n）= 平均插入时间 + resize情况 = O（n/2）+ 1/(n+1) * O（n）= O(n) 概率计算
+                     ② worstTime（n）=O（n），resize
+
+             erase：① avgTime（n）=O（n/2）= O(n) 
+                     ② worstTime（n）=O（n）
+
+5.2 双端队列
+
+<img width="274" alt="image" src="https://user-images.githubusercontent.com/116830062/215386685-1189fbea-4d37-4482-9c5b-3d7f67f2ed2b.png">
+
+1.说明：
+  1. 一个map指针数组（映射数组），指向均分的连续存储的小块（可以是vector，数组等），小块大小都相等。
+
+  2. 三个迭代器：start，finish,itr
+
+  3. 每个迭代器有四个字段，first，current，last，node
+
+     ①start.current:第一个元素
+
+      finish.current:最后一个元素后面的元素
+    
+      itr.current:当前选中的元素
+
+     ②first：current指向的元素所在块的第一个元素
+    
+      ③last：current指向元素所在块的最后一个单元的下一个单元**
+    
+      ④node：指向map中current所在的单元格
+     
+2.时间复杂度
 
 第十一章 优先队列和堆
 
