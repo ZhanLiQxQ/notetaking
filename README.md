@@ -38,20 +38,7 @@
 
 注：
 1.与普通变量不同，动态变量决不能直接访问，而总是通过指针变量访问。
-指针变量存在栈中，动态变量存在堆中。指针变量！=动态变量
-
-2.
-<img width="449" alt="image" src="https://user-images.githubusercontent.com/116830062/215089044-3935f3d7-8c51-4fef-9fc3-6c0665230f77.png">
-
-
-2.2 引用参数
-
-1.引用参数：是一个不可修改的指针，但在函数体中自动解引用。对其一切操作解释成对变量本身操作。
-
-<img width="99" alt="image" src="https://user-images.githubusercontent.com/116830062/215090041-dc66de11-1cab-4202-b24a-3f31937fe5be.png">
-
-最终输出j的值：3
-
+指针变量存在栈中，动态变量存在堆中。指针变量！=动态变量 
 过程：
 
 1.i是引用参数，是指针。
@@ -125,6 +112,7 @@ i = 3 等价于*i = 3，等价于j = 3
 第四章 递归
 
 汉诺塔问题 worsttime（n）= O(2^n)
+
 <img width="287" alt="image" src="https://user-images.githubusercontent.com/116830062/215241411-82678926-9da9-4404-8632-609f49dbb9eb.png">
 
 <img width="294" alt="image" src="https://user-images.githubusercontent.com/116830062/215241392-bbbe90a1-cab0-41aa-a630-d3c5e5d177f2.png">
@@ -244,6 +232,53 @@ stl中的所有类都是模板类
    avgTime(n) = O（1）
    并且，若考虑resize（用向量或队列实现堆），其amortizedTime依旧为常数。
 
-3. pop_heap
+3. pop_heap（将根节点放到最后）
+    自上而下，siftDown数据下沉
+    （大根堆为例）
+    将根与最后一个叶节点互换，该叶节点从根开始，与两个孩子中较大的比较，直至比较到叶；然后用push_heap(数据上浮）调整到合适位置。
     
+    
+<img width="233" alt="image" src="https://user-images.githubusercontent.com/116830062/215450581-94cc012f-c48e-4442-9995-825adf1ec72a.png">
 
+<img width="321" alt="image" src="https://user-images.githubusercontent.com/116830062/215438836-537b4f2b-bc1b-4a5b-ae81-e4a1d253ea6d.png">
+
+<img width="325" alt="image" src="https://user-images.githubusercontent.com/116830062/215450669-b5f9aae8-4ae8-43d6-9fcf-dc0ea6b5e16a.png">
+
+为什么不直接比较父母节点与孩子节点的值，而是一直下沉到叶，再push_heap数据上浮？
+
+个人认为可以提速。这样避免父母节点与孩子比较，提高效率；又由于元素大都集中在最后一层，push_heap只需调整几轮即可，时间复杂度平均为常数，所以这样更好。
+
+
+  4 .建立堆
+  法一：
+      push_heap逐个添加法
+      最坏时间复杂度worstTime（n）=O（n * logn）
+  法二：（更快）
+      先将元素放好，再调整堆
+      从叶节点的父母节点开始，自下而上的siftDown数据下沉。
+      
+      ![image](https://user-images.githubusercontent.com/116830062/215451789-7ea7fb46-1fda-4ef7-98b9-5aafb3d79c34.png)
+
+      时间复杂度avgTime（n）=O（n）
+      
+ 5. sort_heap堆排序   
+    pop_heap不会将根节点erase，只是将它放到最后一个位置，所以：
+    连续调用可以实现堆排序，每次将最大的放到最后，将排好的放好不动，再排序前面的
+    void sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+
+    {
+
+      while (last - first > 1)
+
+      pop_heap(first, last--);
+
+    }
+    堆排序的前提是他本来就是个堆！
+    n个元素排序：avgTime（n）=O（n * logn）
+ 
+    堆排序虽然需要先建堆，但即便如此也更优化，原因是：
+    
+    选择排序：O（n^2）
+    
+    堆排序：avgTime（n）= 建堆 + 堆排序 = O（n）+ O（n * logn）= O（n*logn）
+    堆排序可以说是排序的极限。
