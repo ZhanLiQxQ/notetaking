@@ -197,20 +197,7 @@ stl中的所有类都是模板类
 
 第十一章 优先队列和堆
 
-11.1 优先队列 priority_queue
-1. 定义：一种容器，根据一定方式为项分配优先级，只有优先级最高的可以被访问和删除
-
-
-1 .插入：avgTime(n)=O(1)
-
-2 .删除：worstTime（n）=O(logn)
-
-2 .优先级队列的应用
-
-哈夫曼编码
-
-
-11.2 堆 heap
+11.1 堆 heap
 什么是堆？
 
 一种逻辑结构
@@ -293,5 +280,67 @@ stl中的所有类都是模板类
     
     选择排序：O（n^2）
     
+    
+
     堆排序：avgTime（n）= 建堆 + 堆排序 = O（n）+ O（n * logn）= O（n*logn）
     堆排序可以说是排序的极限。
+    
+11.2 优先队列 priority_queue
+  1. 定义：一种容器，根据一定方式为项分配优先级，只有优先级最高的可以被访问和删除
+
+   ① 优先队列的T模板类要求支持迭代器随机访问！可以是vector或deque但不能为list类！优先级最高的放在最前面
+   ② **形参compare对应缺省变元是内置函数类less，大的优先级高，大->小。
+     **greater为小的优先级高，小->大。
+   
+  优先队列的pop和push应用了堆的函数pop_heap 和 push_heap。
+    1 .push插入：avgTime(n)=O(1)，
+                worstTime(n)=O(n)
+        
+    <img width="130" alt="image" src="https://user-images.githubusercontent.com/116830062/215746276-0a80664e-b432-44f5-a662-27a4fb0da78f.png">
+
+    2 .pop：worstTime（n）=O(logn)
+
+    <img width="129" alt="image" src="https://user-images.githubusercontent.com/116830062/215746241-e84322cc-ccbf-45bd-b18c-b52c50de4df8.png">
+
+words升序（greater），score降序（默认缺省less）
+<img width="187" alt="image" src="https://user-images.githubusercontent.com/116830062/215748612-f90c520b-96be-4095-8d56-0f5f87d442f0.png">
+
+<img width="175" alt="image" src="https://user-images.githubusercontent.com/116830062/215748730-6ff2a0cf-d527-427a-8aa7-f087bb25405c.png">
+
+
+2 .优先级队列的应用
+
+哈夫曼编码：
+
+1 .无前缀变长编码，且无二义性
+2 .利用优先队列，优先级越高越靠近根，**字母出现频率越低优先级越高。
+3 .二叉树，每个字符放在叶节点上
+
+ ① 将字符按频数放入优先队列（频数升序排列）
+ 
+<img width="190" alt="image" src="https://user-images.githubusercontent.com/116830062/215758360-8482f0e9-433e-48b3-b178-59fb3afa85d4.png">
+
+优先级：高->低，频数：低->高
+
+ ② pop（）优先级最高的两个，合成pair
+ 
+ <img width="40" alt="image" src="https://user-images.githubusercontent.com/116830062/215760785-c8110039-ac16-4da2-a4e3-995d30b6a45f.png">
+ 
+
+
+
+
+
+ ③ 将新得到的pair再push（）进优先队列，再次按照优先级排序（频率升序）
+ 
+  <img width="160" alt="image" src="https://user-images.githubusercontent.com/116830062/215762122-525dadf4-8533-4328-9a97-9d907d2fa0ef.png">
+ 
+ ④ pop（）优先级最高的两个，合成pair
+ 
+  <img width="62" alt="image" src="https://user-images.githubusercontent.com/116830062/215760811-d0784bc6-6cea-4879-9e32-0f16ea9c55b2.png">
+ 
+ ⑤ 将新得到的pair再push（）进优先队列，再次按照优先级排序（频率升序）
+ 
+ <img width="275" alt="image" src="https://user-images.githubusercontent.com/116830062/215762632-f97d4a13-4083-4f20-ba2d-319cd106250d.png">
+
+ ...
