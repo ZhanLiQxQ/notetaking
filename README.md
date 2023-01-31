@@ -220,7 +220,8 @@ stl中的所有类都是模板类
    （大根堆为例）
    先放在最后叶节点处，若比父母大，交换；直至根节点。
    
-   worstTime（n）=O（logn） 注：堆是逻辑结构，堆可以由链表或顺序存储结构实现，所以不考虑resize的O（n），当然若由向量或队列实现worsttime成线性。
+   worstTime（n）=O（logn） 
+   注：堆是逻辑结构，所以不考虑resize的O（n），当然若由向量或队列实现worsttime成线性。
    
    由于大部分节点都集中在叶子，平均比较次数不会超过3次，所以：
    avgTime(n) = O（1）
@@ -261,86 +262,144 @@ stl中的所有类都是模板类
     
     时间复杂度avgTime（n）=O（n）
      
+     <img width="265" alt="image" src="https://user-images.githubusercontent.com/116830062/215774615-7ab8e7c4-9bb9-459b-a343-13db1b70389c.png">
+
  5. sort_heap堆排序   
     pop_heap不会将根节点erase，只是将它放到最后一个位置，所以：
     连续调用可以实现堆排序，每次将最大的放到最后，将排好的放好不动，再排序前面的
-    void sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
-
-    {
-
-      while (last - first > 1)
-
-      pop_heap(first, last--);
-
-    }
-    堆排序的前提是他本来就是个堆！
+    
+     void sort_heap(_RandomAccessIterator __first, _RandomAccessIterator __last)
+     
+     {
+     
+     while (last - first > 1)
+     
+     pop_heap(first, last--);
+     
+     }
+     
+     堆排序的前提是他本来就是个堆！
+    
     n个元素排序：avgTime（n）=O（n * logn）
  
     堆排序虽然需要先建堆，但即便如此也更优化，原因是：
     
-    选择排序：O（n^2）
-    
-    
+      ① 选择排序：O（n^2）
+      
+      ② 堆排序：avgTime（n）= 建堆 + 堆排序 = O（n）+ O（n * logn）= O（n*logn）
+      
+        堆排序可以说是排序的极限。
+        
+二 .堆的使用
+ ① 建堆make_heap
+ 
+  #include<algorithm>
 
-    堆排序：avgTime（n）= 建堆 + 堆排序 = O（n）+ O（n * logn）= O（n*logn）
-    堆排序可以说是排序的极限。
-    
+  <img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215795088-9d705e86-40a4-4d4b-a239-5a6bb7c74c3b.png">
+  
+  输出：（大根堆和小根堆）
+  
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215795827-bc97ac1e-d38f-4ddf-9a8f-16bc9cf271ca.png">
+
+  以大根堆nums_max为例的构造过程示意图：
+  
+  ![629160091efb4cbfa070b7d39f70d435](https://user-images.githubusercontent.com/116830062/215455181-6a23e62e-1fdb-452c-92cc-a750973571af.gif)
+  
+  自下而上再自上而下，最终：
+
+  <img width="800" alt="image" src="https://user-images.githubusercontent.com/116830062/215793070-fe0869db-2ce4-414f-bc27-416e2e778dea.png">
+  
+  ②向堆中插入元素
+  向大根堆中插入20
+
+  <img width="238" alt="image" src="https://user-images.githubusercontent.com/116830062/215799119-fa267dc0-f6dd-45bb-a45c-510fad449bf0.png">
+  <img width="704" alt="image" src="https://user-images.githubusercontent.com/116830062/215801881-470800f8-8394-47e7-b3b7-644a112af247.png">
+
+
 11.2 优先队列 priority_queue
-  1. 定义：一种容器，根据一定方式为项分配优先级，只有优先级最高的可以被访问和删除
 
-   ① 优先队列的T模板类要求支持迭代器随机访问！可以是vector或deque但不能为list类！优先级最高的放在最前面
-   ② **形参compare对应缺省变元是内置函数类less，大的优先级高，大->小。
-     **greater为小的优先级高，小->大。
+  1. 定义：一种容器，根据一定方式为项分配优先级，只有优先级最高的可以被访问和删除
+     ① 优先队列的T模板类要求支持迭代器随机访问！可以是vector或deque但不能为list类！优先级最高的放在最前面
+     ② **形参compare对应缺省变元是内置函数类less，大的优先级高，大->小。
+        **greater为小的优先级高，小->大。
    
-  优先队列的pop和push应用了堆的函数pop_heap 和 push_heap。
+  在标准c++中，优先队列的pop和push应用了堆的函数pop_heap 和 push_heap。
     1 .push插入：avgTime(n)=O(1)，
                 worstTime(n)=O(n)
         
-    <img width="130" alt="image" src="https://user-images.githubusercontent.com/116830062/215746276-0a80664e-b432-44f5-a662-27a4fb0da78f.png">
+   <img width="130" alt="image" src="https://user-images.githubusercontent.com/116830062/215746276-0a80664e-b432-44f5-a662-27a4fb0da78f.png">
 
     2 .pop：worstTime（n）=O(logn)
 
-    <img width="129" alt="image" src="https://user-images.githubusercontent.com/116830062/215746241-e84322cc-ccbf-45bd-b18c-b52c50de4df8.png">
+   <img width="129" alt="image" src="https://user-images.githubusercontent.com/116830062/215746241-e84322cc-ccbf-45bd-b18c-b52c50de4df8.png">
 
 words升序（greater），score降序（默认缺省less）
+
 <img width="187" alt="image" src="https://user-images.githubusercontent.com/116830062/215748612-f90c520b-96be-4095-8d56-0f5f87d442f0.png">
 
 <img width="175" alt="image" src="https://user-images.githubusercontent.com/116830062/215748730-6ff2a0cf-d527-427a-8aa7-f087bb25405c.png">
 
+注：
+
+在标准c++中，只有用堆实现优先队列是合法的，但用set和列表实现也各有各的优点。
+
+<img width="705" alt="image" src="https://user-images.githubusercontent.com/116830062/215768493-210c6a79-d8f2-4a57-a7ee-c8dea1d8acea.png">
 
 2 .优先级队列的应用
 
 哈夫曼编码：
 
-1 .无前缀变长编码，且无二义性
-2 .利用优先队列，优先级越高越靠近根，**字母出现频率越低优先级越高。
-3 .二叉树，每个字符放在叶节点上
+    1 .无前缀变长编码，且无二义性
+    2 .利用优先队列，优先级越高越靠近根，**字母出现频率越低优先级越高。
+    3 .自下而上生成二叉树，每个字符放在叶节点上
 
+哈夫曼树生成过程（自下而上）：
  ① 将字符按频数放入优先队列（频数升序排列）
  
-<img width="190" alt="image" src="https://user-images.githubusercontent.com/116830062/215758360-8482f0e9-433e-48b3-b178-59fb3afa85d4.png">
+<img width="378" alt="image" src="https://user-images.githubusercontent.com/116830062/215763202-c8d626d0-eb2d-47b6-8364-638bb74d31b9.png">
 
 优先级：高->低，频数：低->高
 
  ② pop（）优先级最高的两个，合成pair
  
- <img width="40" alt="image" src="https://user-images.githubusercontent.com/116830062/215760785-c8110039-ac16-4da2-a4e3-995d30b6a45f.png">
+ <img width="82" alt="image" src="https://user-images.githubusercontent.com/116830062/215763291-383fdda1-28a4-46c1-b202-0660430aa930.png">
  
-
-
-
-
 
  ③ 将新得到的pair再push（）进优先队列，再次按照优先级排序（频率升序）
  
-  <img width="160" alt="image" src="https://user-images.githubusercontent.com/116830062/215762122-525dadf4-8533-4328-9a97-9d907d2fa0ef.png">
- 
+ <img width="324" alt="image" src="https://user-images.githubusercontent.com/116830062/215763532-f8be80fa-2e2a-4f62-b3f2-266ebefac973.png">
+
+
  ④ pop（）优先级最高的两个，合成pair
  
-  <img width="62" alt="image" src="https://user-images.githubusercontent.com/116830062/215760811-d0784bc6-6cea-4879-9e32-0f16ea9c55b2.png">
- 
+ <img width="113" alt="image" src="https://user-images.githubusercontent.com/116830062/215763578-101eec0a-69ed-4df2-af40-653e1bc68a49.png">
+   
  ⑤ 将新得到的pair再push（）进优先队列，再次按照优先级排序（频率升序）
  
- <img width="275" alt="image" src="https://user-images.githubusercontent.com/116830062/215762632-f97d4a13-4083-4f20-ba2d-319cd106250d.png">
-
  ...
+ 
+ <img width="275" alt="image" src="https://user-images.githubusercontent.com/116830062/215762632-f97d4a13-4083-4f20-ba2d-319cd106250d.png">
+ 
+ pop<img width="100" alt="image" src="https://user-images.githubusercontent.com/116830062/215764438-66f8cb0e-5e43-4963-a4f8-cfbed8ce0e87.png">
+合成pair：
+ 
+<img width="204" alt="image" src="https://user-images.githubusercontent.com/116830062/215763097-9b33115a-dde6-4387-bfbe-3a5589fb8fe8.png">
+
+<img width="219" alt="image" src="https://user-images.githubusercontent.com/116830062/215763666-f1227d16-79fd-4f1b-8456-828f2a2dc9ee.png">
+
+pop <img width="100" alt="image" src="https://user-images.githubusercontent.com/116830062/215764720-96bc3db7-d19a-472f-97e4-87808fb6dd02.png">
+合成pair：
+
+<img width="377" alt="image" src="https://user-images.githubusercontent.com/116830062/215763737-bf152b1b-4c1c-4cae-8341-0b563042a4b9.png">
+
+pop <img width="100" alt="image" src="https://user-images.githubusercontent.com/116830062/215764925-eb47e9fe-c3fb-46d3-9fa2-d9277ff2c798.png">
+合成pair：
+
+<img width="301" alt="image" src="https://user-images.githubusercontent.com/116830062/215763815-fbaa14a4-5095-48c9-b7ca-48df7908b85c.png">
+
+最终huffman编码为：
+
+<img width="71" alt="image" src="https://user-images.githubusercontent.com/116830062/215763886-52cb57bb-dd89-4dd6-9eb7-13c40e56a13a.png">
+
+ 
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215767839-7bc1c5dc-1c60-4f2a-89e1-19aa023cec3e.png">
