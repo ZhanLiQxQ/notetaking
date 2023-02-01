@@ -193,7 +193,41 @@ stl中的所有类都是模板类
              erase：① avgTime（n）=O（n/4）= O(n) 
                      ② worstTime（n）=O（n/2）= O(n)
                      **就近移动：若靠近尾部，后项前移；若靠近头部，前项后移。因此只需平均移动队列中1/4的项。       
-             
+                     
+第六章 表
+
+6.1 .表，又称为链表：
+  ① 缺乏随机访问特征
+  ② 常数时间插入和删除，
+  ③ 构造器：worstTime（n）=O（n）
+  
+6.2 .自制简易双向链表实现（带有tail）
+ 1.有指向头结点和尾结点的指针head 和 tail 
+ 
+<img width="189" alt="image" src="https://user-images.githubusercontent.com/116830062/215956425-db034bfb-59fd-4c05-aa98-d25d44b14853.png">
+
+<img width="291" alt="image" src="https://user-images.githubusercontent.com/116830062/215956459-de45bc27-19d0-440b-8cb1-1da95f1444de.png">
+
+6.3 惠普版本双向链表
+1 .有一个头结点，item值为空。有一个node指针指向头结点。
+2 .头结点next指向尾结点，尾结点prev指向头结点。
+
+<img width="155" alt="image" src="https://user-images.githubusercontent.com/116830062/215956330-71324649-b177-45a4-a657-3dd3da763749.png">
+
+初始：
+
+<img width="132" alt="image" src="https://user-images.githubusercontent.com/116830062/215955239-471a6a13-300e-43d6-b979-dcac23845a7e.png">
+
+
+<img width="248" alt="image" src="https://user-images.githubusercontent.com/116830062/215955199-05057960-5010-4dab-94a6-8a0f65594072.png">
+
+惠普单独把头作为一个节点，避免了null惹出的许多不必要的麻烦。
+
+<img width="383" alt="image" src="https://user-images.githubusercontent.com/116830062/215955782-5ce517c8-a8d4-4e9d-a3c4-8ffb73c4a8b1.png">
+
+注：
+
+insert：插入到position前面的位置，并返回指向被插入元素的迭代器。
 
 第十一章 优先队列和堆
 
@@ -208,9 +242,11 @@ stl中的所有类都是模板类
 
 <img width="221" alt="image" src="https://user-images.githubusercontent.com/116830062/215457532-d4b44880-6bf9-44a4-937e-62ff8a190b8d.png">
 
-用数组表示：（原则是父母子女下标的对应关系满足公式）
+用数组表示：
+
 <img width="243" alt="image" src="https://user-images.githubusercontent.com/116830062/215457788-9fae94b5-5cb1-4b63-b2c8-b8950b4183c6.png">
 
+（原则是父母子女下标的对应关系满足公式）
 1. 下标：
     父母：i = (j-1)/2
     孩子：j = 2i+1 , 2i+2
@@ -291,9 +327,10 @@ stl中的所有类都是模板类
         堆排序可以说是排序的极限。
         
 二 .堆的使用
+
  ① 建堆make_heap
  
-  #include<algorithm>
+  #include <algorithm>
 
   <img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215795088-9d705e86-40a4-4d4b-a239-5a6bb7c74c3b.png">
   
@@ -312,9 +349,22 @@ stl中的所有类都是模板类
   ②向堆中插入元素
   向大根堆中插入20
 
-  <img width="238" alt="image" src="https://user-images.githubusercontent.com/116830062/215799119-fa267dc0-f6dd-45bb-a45c-510fad449bf0.png">
+  <img width="400" alt="image" src="https://user-images.githubusercontent.com/116830062/215799119-fa267dc0-f6dd-45bb-a45c-510fad449bf0.png">
   <img width="704" alt="image" src="https://user-images.githubusercontent.com/116830062/215801881-470800f8-8394-47e7-b3b7-644a112af247.png">
 
+  ③删除堆顶元素
+  
+  注：
+      1 . 第三个参数（可缺省值）必须与make_heap一致！
+      2 . pop_heap只是将堆顶元素移到最后，再调用pop_back才能删除！
+      
+  <img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215928726-41800242-9e60-4cd6-9a9b-8c7854656bff.png">
+  
+  输出nums_max:
+  
+  <img width="500" alt="image" src="https://user-images.githubusercontent.com/116830062/215943822-8b6c3728-ed61-40f9-87c6-7cdd5ba9598c.png">
+  
+![image](https://user-images.githubusercontent.com/116830062/215943561-ce0a7382-e4b4-4505-90f4-21c07fd1371d.png)
 
 11.2 优先队列 priority_queue
 
