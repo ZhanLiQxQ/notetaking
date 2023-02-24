@@ -298,7 +298,7 @@ insert：插入到position前面的位置，并返回指向被插入元素的迭
     
     时间复杂度avgTime（n）=O（n）
      
-     <img width="265" alt="image" src="https://user-images.githubusercontent.com/116830062/215774615-7ab8e7c4-9bb9-459b-a343-13db1b70389c.png">
+<img width="265" alt="image" src="https://user-images.githubusercontent.com/116830062/215774615-7ab8e7c4-9bb9-459b-a343-13db1b70389c.png">
 
  5. sort_heap堆排序   
     pop_heap不会将根节点erase，只是将它放到最后一个位置，所以：
